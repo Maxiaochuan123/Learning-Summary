@@ -1,0 +1,12 @@
+revert 编辑器上只能一个一个回退
+
+# 命令
+git revert -n 6fbcb06 e46b2c3 c99dca0 3810e24 （从旧到新，如果有merge master之类的需要跳过，因为提交后本来需要重新合并分支）
+
+git revert --no-commit 6fbcb06^..3810e24 （不会跳过 merge master之类 hash 容易有冲突，所以最好使用上面的 列出来）
+
+# 或者如果想取消这次 revert
+git revert --abort
+
+# 或者完全撤销提交和更改（本地提交了撤销 推送）
+git reset --hard HEAD~1

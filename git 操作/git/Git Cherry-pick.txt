@@ -1,0 +1,40 @@
+基本操作：将 【A分支】的提交应用到【B分支】
+
+# 1. 切换到【B分支】
+git checkout 【B分支】名
+
+# 2. 先在当前【B分支】查看【A分支】的 最近两次提交记录下提交哈希
+git log --oneline 【A分支】名 -5
+
+# 3. 应用提交
+git cherry-pick commit-hash1   或范围   git cherry-pick commit-hash1^..commit-hash1 （必须从旧老新顺序）
+
+# 4. 推送
+git push origin B分支名
+
+
+遇到冲突怎么办
+# 手动解决冲突后
+git add .
+git cherry-pick --continue
+
+# 或者放弃
+git cherry-pick --abort
+
+遇到 "cherry-pick is already in progress" 错误
+# 查看状态
+git status
+
+# 继续完成
+git cherry-pick --continue
+
+# 或者放弃重来
+git cherry-pick --abort
+
+
+注意事项：
+
+Cherry-pick 的顺序很重要，要从旧到新
+如果不确定提交顺序，先用 git log --oneline -2 查看
+遇到冲突时，解决后用 git cherry-pick --continue
+想放弃整个操作用 git cherry-pick --abort

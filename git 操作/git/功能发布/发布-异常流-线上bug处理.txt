@@ -1,0 +1,45 @@
+# 1. 从生产版本创建热修复分支
+git checkout v1.2.3
+git checkout -b hotfix/critical-bug
+
+# 2. 修复问题
+# 修改相关文件...
+git add .
+git commit -m "fix: 修复关键性bug"
+
+# 3. 先合并到测试分支进行验证
+git checkout test
+git merge hotfix/critical-bug
+git push origin test
+
+# 4. 等待测试环境验证
+# - 进行完整测试
+# - QA团队验证
+# - 相关业务方验证
+
+# 5. 测试通过后，合并到生产分支
+git checkout main
+git merge hotfix/critical-bug
+git push origin main
+
+# 6. 创建新的补丁版本
+git tag -a v1.2.4 -m "紧急修复：修复关键性bug"
+git push origin v1.2.4
+
+# 7. 等待生产环境部署验证
+# 确认新版本在生产环境运行正常
+
+# 8. 同步到所有相关分支
+# 同步到 master（稳定版本分支）
+git checkout master
+git merge v1.2.4  # 使用 tag 来合并，确保版本一致性
+git push origin master
+
+# 同步到开发分支
+git checkout develop
+git merge v1.2.4
+git push origin develop
+
+# 9. 最后清理分支
+git branch -d hotfix/critical-bug
+git push origin --delete hotfix/critical-bug  # 如果推送到了远程

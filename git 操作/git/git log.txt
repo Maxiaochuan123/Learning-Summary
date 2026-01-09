@@ -1,0 +1,14 @@
+常用命令：
+git reflog  #显示所有操作历史，可以用来恢复误操作，默认保存 90 天
+git log --oneline         # 每个提交显示在一行
+git log --oneline --graph --decorate  # 最常用的简洁格式（推荐）
+git log                    # 显示完整的提交历史
+git log -n 5              # 只显示最近的 5 条提交
+git log --graph           # 以图形方式显示分支合并历史
+
+git show commit_hash  # 查看某个提交的详细信息
+git log --author="John"   # 显示指定作者的提交
+
+git log --since="2 weeks ago"    # 显示最近两周的提交
+git log --after="2024-01-01"     # 显示指定日期之后的提交
+git log --before="2024-01-01"    # 显示指定日期之前的提交

@@ -1,0 +1,30 @@
+#退回到指定 commit head 并 覆盖提交记录, 其中 ^ 符号表示该提交的父提交（前一个提交）
+git log --oneline --graph --decorate
+git reset --hard <commit-hash>^
+git push origin dev-mxc  -f
+
+
+
+# 重置本地 test 到远程状态
+git fetch origin
+git reset --hard 8b84ff5acda6438db2516768b15846b57357cf5b
+git push --force
+
+
+面板中操作
+
+GITLENS
+
+有两个提交 feat: 1, feat: 2, 回退到 feat: 1
+
+安全回退带有提交记录
+1.当前要回退的节点上右键（你要回退本次提交） Revert Commit
+   选择 Revert 然后点击 同步更改（会自动带一条回退 message “revert "feat: 2"”）
+   选择 Revert&Edit 可以回退修改 （可以自己调整 message 和 修改文件再提交，不需要手动 add.）
+
+2.在要回退到的节点提交上右键（你要回退到那次提交，就在回退到的位置操作）Reset Current Branch to Commit..（搭配 git push origin 分支名 -f）
+   选择 Reset（可以自己调整 message 和 修改文件再提交，不保留提交记录，无需手动 add.）
+   选择 Soft Reset（可以自己调整 message 和 修改文件再提交，不保留提交记录，需手动 add.）
+   选择 Hard Reset（不可以调整 message 和 修改文件，不保留提交记录）
+
+3.在要回退的节点上右键与 2的操作相似（你要回退到本次提交的前一次提交） Reset Current Branch to Previous Commit..（搭配 git push origin 分支名 -f）

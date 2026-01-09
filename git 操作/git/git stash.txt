@@ -1,0 +1,23 @@
+1.保存当前修改：
+git stash  # 基础用法
+git stash -m  "修改描述"  # 带描述信息的保存
+git stash -u -m "新增-急速领取额度页面"  # 暂存所有修改
+
+2.查看 stash 列表：
+git stash list  # 显示所有的 stash
+
+3.恢复 stash：
+git stash pop   # 恢复最近的一次 stash 并删除它
+git stash pop stash@{n}   # 恢复指定的 stash（n 是编号）并删除它
+
+git stash apply # 恢复最近的一次 stash 但不删除它
+git stash apply stash@{n} # 应用指定的 stash 但不删除它
+
+4.删除 stash：
+git stash drop stash@{n}  # 删除指定的 stash
+git stash clear          # 删除所有 stash
+
+5.查看 stash 的具体改动：
+git stash show           # 显示最近一次 stash 的文件改动
+git stash show -p        # 显示最近一次 stash 的具体改动内容
+git stash show stash@{n} # 显示指定 stash 的文件改动

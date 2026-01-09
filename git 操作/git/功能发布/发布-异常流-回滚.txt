@@ -1,0 +1,38 @@
+# 1. 查看当前版本和历史
+git tag    # 查看所有标签
+git log    # 查看提交历史
+
+# 2. 创建回滚分支（可选，建议创建）
+git checkout v1.2.3    # 切换到当前生产版本
+git checkout -b hotfix/rollback-v1.2.3
+
+# 3. 执行 revert
+git revert commit_hash    # 回滚指定的提交
+# 或者
+git revert v1.2.3        # 回滚指定的标签版本
+
+# 4. 推送到测试环境验证
+git checkout test
+git merge hotfix/rollback-v1.2.3
+git push origin test
+
+# 5. 验证通过后，合并到生产环境
+git checkout main
+git merge hotfix/rollback-v1.2.3
+git push origin main
+
+# 6. 创建回滚后的新版本标签
+git tag -a v1.2.4 -m "回滚: 回滚到v1.2.2版本"
+git push origin v1.2.4
+
+# 7. 同步到其他分支
+git checkout master
+git merge v1.2.4
+git push origin master
+
+git checkout develop
+git merge v1.2.4
+git push origin develop
+
+# 8. 清理临时分支
+git branch -d hotfix/rollback-v1.2.3

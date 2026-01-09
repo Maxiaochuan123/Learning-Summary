@@ -1,0 +1,5 @@
+# 查看具体的分支差异
+git diff origin/test test
+
+# 或者查看日志差异
+git log origin/test..test

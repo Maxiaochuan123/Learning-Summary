@@ -1,0 +1,98 @@
+我来介绍一个标准的团队 Git 协作流程，以开发新功能为例：
+1.首先，确保你的主分支是最新的：
+# 切换到主分支（通常是 develop 或 test）
+git checkout develop
+# 拉取最新代码
+git pull origin develop
+
+2.创建新的功能分支：
+# 创建并切换到新分支
+git checkout -b feature/your-feature-name
+
+# 分支命名建议：
+# feature/xxx     - 新功能
+# hotfix/xxx     - 紧急修复
+# bugfix/xxx     - 普通bug修复
+# optimize/xxx   - 优化功能
+
+3.在功能分支上开发：
+# 开发过程中经常提交代码
+git add .
+git commit -m "feat: 功能描述"
+
+# commit message 规范：
+# feat: 新功能
+# fix: 修复bug
+# docs: 文档更新
+# style: 代码格式化
+# refactor: 重构
+# test: 测试相关
+# chore: 构建过程或辅助工具的变动
+
+4.保持分支同步：
+# 定期从主分支拉取最新代码
+git checkout develop
+git pull origin develop
+git checkout feature/your-feature-name
+git merge develop
+
+# 如果有冲突，解决冲突后：
+git add .
+git commit -m "merge: resolve conflicts"
+
+
+5.功能完成后，推送到远程：
+git push origin feature/your-feature-name
+
+
+6.创建合并请求（Pull Request / Merge Request）：
+# 在 GitHub/GitLab 上创建 PR/MR
+# 从 feature/your-feature-name 到 develop
+
+7.代码审查后合并：
+# 审查通过后，合并到主分支
+# 可以在 GitHub/GitLab 上点击合并
+# 或使用命令行：
+git checkout develop
+git merge feature/your-feature-name
+git push origin develop
+
+8.清理分支：
+# 删除本地分支
+git branch -d feature/your-feature-name
+# 删除远程分支
+git push origin --delete feature/your-feature-name
+
+
+
+重要提示：
+1.分支管理：
+# 查看所有分支
+git branch -a
+
+# 查看远程分支
+git branch -r
+
+# 删除已合并的本地分支
+git branch --merged | grep -v "\*" | xargs -n 1 git branch -d
+
+
+2.如果开发过程中主分支有更新：
+# 方法1：合并主分支（推荐）
+git checkout feature/your-feature-name
+git merge develop
+
+# 方法2：变基（rebase）- 使历史更清晰
+git checkout feature/your-feature-name
+git rebase develop
+
+
+3.紧急修复流程：
+# 从主分支创建热修复分支
+git checkout develop
+git checkout -b hotfix/urgent-fix
+
+# 修复完成后合并回主分支
+git checkout develop
+git merge hotfix/urgent-fix
+git push origin develop

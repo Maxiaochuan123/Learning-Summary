@@ -1,0 +1,29 @@
+每天开始工作前：
+在本地 dev-mxc 分支获取最新的 dev 分支代码
+git stash   # 暂存当前工作（如果有的话）
+
+# 1. 方式1：fetch + merge（推荐，更安全）
+# 1. 确保在 dev-mxc 分支
+git checkout dev-mxc
+
+# 2. 获取 dev 分支的最新代码
+git fetch origin dev
+
+# 3. 可以先查看更新内容
+git log dev-mxc..origin/dev
+
+# 4. 确认无误后合并
+git merge origin/dev
+
+git pop # 恢复当前工作（如果有的话）
+
+# 4. 推送更新后的 dev-mxc
+git push origin dev-mxc
+
+# 开发过程中
+git add .
+git commit -m "feat: xxx"    # 提交修改
+git push origin dev-mxc      # 推送到远程
+
+# 需要合并到 test 时
+# 在 GitLab 上创建合并请求（MR）

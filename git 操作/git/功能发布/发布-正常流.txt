@@ -1,0 +1,116 @@
+那 合并后如何 后续 提交 打 tag 发布呢？
+下面介绍合并后的版本发布和打 tag 流程：
+
+1.确保代码已经合并到主分支并测试通过：
+# 切换到主分支
+git checkout main  # 或 master
+
+# 拉取最新代码
+git pull origin main
+
+# 确保代码是最新的
+git status
+
+
+2.创建版本 tag：
+# 创建带注释的 tag（推荐）
+git tag -a v1.2.3 -m "版本 1.2.3 发布：新增xxx功能"
+
+# 或者创建轻量级 tag
+git tag v1.2.3
+
+# 版本号规范 (语义化版本)：
+# v主版本号.次版本号.修订号
+# v1.0.0  - 首次发布
+# v1.1.0  - 新功能发布
+# v1.1.1  - bug修复
+
+
+3.推送 tag 到远程：
+# 推送单个 tag
+git push origin v1.2.3
+
+# 或推送所有 tag
+git push origin --tags
+
+
+4.管理 tag：
+# 查看所有 tag
+git tag
+
+# 查看 tag 详细信息
+git show v1.2.3
+
+# 删除本地 tag
+git tag -d v1.2.3
+
+# 删除远程 tag
+git push origin --delete v1.2.3
+
+
+5.发布流程示例：
+# 1. 确保在主分支
+git checkout main
+git pull origin main
+
+# 2. 更新版本号（如果需要）
+# 修改 package.json 中的 version
+
+# 3. 提交版本更新
+git add package.json
+git commit -m "chore: bump version to 1.2.3"
+
+# 4. 创建 tag
+git tag -a v1.2.3 -m "版本 1.2.3 发布：
+- 新增xxx功能
+- 修复xxx问题
+- 优化xxx体验"
+
+# 5. 推送更新和 tag
+git push origin main
+git push origin v1.2.3
+
+
+6.版本发布注意事项：
+# 发布前检查清单：
+1. 代码是否完全合并
+2. 测试是否通过
+3. 文档是否更新
+4. 版本号是否符合规范
+5. tag 信息是否完整
+6. CHANGELOG 是否更新
+
+# 版本号规范（语义化版本）：
+主版本号：不兼容的 API 修改
+次版本号：向下兼容的功能性新增
+修订号：向下兼容的问题修复
+
+
+7. 生成更新日志（可选）：
+# 可以使用工具自动生成 CHANGELOG
+# 例如使用 conventional-changelog-cli
+
+# 安装
+npm install -g conventional-changelog-cli
+
+# 生成 CHANGELOG
+conventional-changelog -p angular -i CHANGELOG.md -s
+
+# 或者手动维护 CHANGELOG.md
+
+
+8.发布后续工作：
+# 1. 在 GitHub/GitLab 创建 Release
+- 使用 tag 创建 release
+- 填写详细的更新说明
+- 附加相关构建文件（如果需要）
+
+# 2. 通知相关人员
+- 通知测试团队
+- 通知运维团队
+- 通知其他开发者
+
+# 3. 监控新版本
+- 观察系统运行情况
+- 收集用户反馈
+- 准备应对可能的问题
