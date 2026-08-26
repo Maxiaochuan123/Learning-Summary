@@ -7,7 +7,9 @@ git checkout 【B分支】名
 git log --oneline 【A分支】名 -5
 
 # 3. 应用提交
-git cherry-pick commit-hash1   或范围   git cherry-pick commit-hash1^..commit-hash1 （必须从旧老新顺序）
+1. 指定 提交 git cherry-pick commit-hash1
+2. 指定多个 提交（空格隔开要去掉避开merge的提交,必须从旧老新顺序，如果要取消那么需要手动重置到搬运前的hash git reset --hard commit-hash） git cherry-pick commit-hash1 commit-hash2 commit-hash3
+或范围   git cherry-pick commit-hash1^..commit-hash1 （必须从旧老新顺序）
 
 # 4. 推送
 git push origin B分支名
@@ -17,6 +19,9 @@ git push origin B分支名
 # 手动解决冲突后
 git add .
 git cherry-pick --continue
+
+# 跳过
+git cherry-pick --skip
 
 # 或者放弃
 git cherry-pick --abort
